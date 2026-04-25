@@ -1,13 +1,16 @@
 name: Deploy Docker Fullstack App
 
 on:
-push:
-branches:
-- main
+
+  push:
+
+    branches:
+
+       - main
 
 jobs:
-deploy:
-runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-latest
 
 
 steps:
