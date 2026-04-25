@@ -1,0 +1,44 @@
+name: Deploy Docker Fullstack App
+
+on:
+push:
+branches:
+- main
+
+jobs:
+deploy:
+runs-on: ubuntu-latest
+
+```
+steps:
+  - name: Deploy to EC2 via SSH
+    uses: appleboy/ssh-action@v1.0.3
+    with:
+      host: ${{ secrets.EC2_HOST }}
+      username: ubuntu
+      key: ${{ secrets.EC2_SSH_KEY }}
+      script: |
+        echo "🚀 Starting deployment..."
+
+        # Go to home
+        cd ~
+
+        # Clone repo if not exists
+        if [ ! -d "docker-fullstack-app" ]; then
+          git clone https://github.com/altafali309/docker-fullstack-app.git
+        fi
+
+        # Go into project
+        cd docker-fullstack-app
+
+        # Pull latest code
+        git pull origin main
+
+        # Stop old containers
+        docker-compose down
+
+        # Build and run new containers
+        docker-compose up -d --build
+
+        echo "✅ Deployment completed!"
+```
