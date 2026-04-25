@@ -1,0 +1,4 @@
+node_modules/
+.env
+*.log
+Docker-New-App/db_data/
