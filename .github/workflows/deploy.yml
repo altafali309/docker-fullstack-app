@@ -9,8 +9,8 @@ on:
        - main
 
 jobs:
-  deploy:
-  runs-on: ubuntu-latest
+deploy:
+runs-on: ubuntu-latest
 
   steps:
     - name: Deploy to EC2 via SSH
